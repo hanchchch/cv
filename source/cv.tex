@@ -1,0 +1,95 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ReCeiVe
+% LuaLaTeX Template
+% Version 1.12.0 (10/10/2020)
+%
+% Original authors:
+% Ged Lex (gedlex@hotmail.ch)
+%
+% Important note:
+% This template must be compiled with LuaLaTeX, the below lines will ensure this
+%!TEX TS-program = lualatex
+%!TEX encoding = UTF-8 Unicode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[rightPos]{ReCeiVe}      % By default, use 'letterpaper' for US letter
+%\geometry{letterpaper, % paper size
+%          left=1.75cm, right=1.75cm, top=1.5cm, bottom=1.5cm, footskip=.6cm, headsep=.5cm, % margins
+%          showframe}                  % show geometry frame
+%          heightrounded}              % avoid underfull vbox warning
+          
+% Color for highlights
+%\definecolor{highlight}{HTML}{EB9534} % Specify your own color
+%\colorlet{highlight}{white}           % Set predefined color
+% Default colors include: darkgray, gray, lightgray, lightblue, orange, red, concrete
+
+% Colors for text - uncomment and modify
+%\definecolor{darktext}{HTML}{414141}
+%\definecolor{text}{HTML}{414141}
+%\definecolor{graytext}{HTML}{414141}
+%\definecolor{lighttext}{HTML}{414141}
+
+%----------------------------------------------------------------------------------------
+%	PERSONAL INFORMATION
+%	Comment any of the lines below if they are not required
+%----------------------------------------------------------------------------------------
+% \background{pics/background5.pdf}
+\photo[circle,edge,fill,left]{2.5cm}{pics/photo2.jpeg}
+\name{Chung Hwan}{Han}
+\address{Seoul, Korea}
+\mobile{+82 10 4910 3857}
+\email{cndghks15@gmail.com}
+\github{hanchchch}
+\linkedin{Chung Hwan Han}
+%\homepage{www.homepage.com}
+%\twitter{@twit}
+%\xing{xing name}
+%\stackoverflow{SOid}{SOname}
+%\skype{skypeid}
+%\reddit{reddit account}
+%\extrainfo{info}
+
+\position{Backend Engineer} % Your expertise/fields
+% \quote{"Some men see things as they are, and ask why. I dream of things that never were, and ask why not." - Robert Kennedy} % A quote or statement
+
+%----------------------------------------------------------------------------------------
+%	SIDEBAR CONTENT
+%	Fill in the information you would like to add to your sidebar
+%----------------------------------------------------------------------------------------
+
+\aboutMe{MLOps Engineer, Software developer, and Blockchain developer.}
+% \skillset[label/0\hfill +500 h]{MATLAB/.8,Python/.4,VBA/.6}
+\languages{{English/Fluent (C1 Certificate)},{Korean/Mother tongue}}
+\stacks{{Python/Django, Flask, Airflow, Pandas}, {Go/Protobuf, gPRC, Gin}, {Typescript/Nest.js, express.js, ethers.js}, {React/Next.js, Redux-saga, Recoil}, {Solidity/Hardhat, Alchemy}, {Container/docker, docker-compose, kubernetes}, {IaC/Pulumi-AWS}, {AWS/EC2, ECS, Lambda, CloudWatch}, {GCP/VM, BigQuery}}
+\contribution{{pulumi/pulumi-hugo/1058}, {blockcoders/nestjs-ethers/135}}
+
+% Usage: \userSection[<section title>]{<content>}
+% \userSection[title]{content}
+
+%----------------------------------------------------------------------------------------
+\begin{document}
+% Print the header
+% Usage: \makecvheader[<position>]
+\makecvheader[L]
+% Print the sidebar
+% Usage: \makecvsidebar[xOffset/value,yOffset/value,noRadius|radius]
+\makecvsidebar
+
+%----------------------------------------------------------------------------------------
+%	CV/RESUME CONTENT
+%	Each section is imported separately, open each file in order to modify it
+%----------------------------------------------------------------------------------------
+\input{sections/education.tex}
+\input{sections/workExperience.tex}
+\input{sections/extraCurriculum.tex}
+\input{sections/projects.tex}
+\input{sections/honors.tex}
+
+%----------------------------------------------------------------------------------------
+% Usage: \makecvfooter(<left>}{<center>}{<right>)
+\makecvfooter{\today}{Ged Lex~~~·~~~CV}{\LaTeX{}}
+\end{document}
+
