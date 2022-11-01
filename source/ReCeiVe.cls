@@ -637,9 +637,9 @@
 	\begin{minipage}[c]{\@headertextwidth}
 		\ifthenelse{\equal{#1}{L}}{% Left
 			\raggedright%
-			\headerlastnamestyle{\@firstname}\\%
-			\headerlastnamestyle{\@lastname}%
-			\\[\acvHeaderAfterNameSkip]%
+			\headerlastnamestyle{\@firstname}%
+			\ifthenelse{\equal{\@lastname}{}}{}{\\\headerlastnamestyle{\@lastname}}%
+			\\[\acvHeaderAfterNameSkip]
 			\ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position}}\\%
 			\vspace{\acvHeaderAfterHeaderSkip}%
 		}{%
