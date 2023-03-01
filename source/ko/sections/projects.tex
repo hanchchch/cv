@@ -28,10 +28,24 @@
 {Cloud-based malicious URL detection system.}
 {gimi}
 {\href{https://github.com/hanchchch/gimi}{Github}}
-{09/2022 - On going}
+{09/2022 - 12/2022}
 \begin{cvitems}
 \item {URL을 격리된 컨테이너에서 검사하고, 악성 여부를 판단하는 시스템입니다.}
 \item {FaaS처럼, URL 검사 요청이 들어왔을 때 새로운 컨테이너를 즉시 프로비저닝하고 검사합니다.}
 \item {Heterogenous한 함수들을 구성하기 위해 간단한 FaaS 플랫폼을 직접 구현했습니다.}
 \item {컨트롤러 및 마이크로서비스는 NestJS로 개발했으며, 메세지 큐는 Redis를, 컨테이너 관리는 Docker Go client로, 컴포넌트 간 통신는 protobuf와 gRPC를 사용했습니다.}
+\end{cvitems}
+
+\cventry
+{Simulation for CSMA/CA with BEB and RTS/CTS}
+{csma-ca}
+{\href{https://github.com/hanchchch/csma-ca}{Github}}
+{12/2021 - 12/2021}
+\begin{cvitems}
+\item {CSMA/CA 프로토콜의 시뮬레이션 환경을 파이썬으로 구현했습니다.}
+\item {DI 패턴을 차용하여 RTS, frame rate, detect range 등 설정을 자유롭게 할 수 있습니다.}
+\item {시뮬레이션은 터미널에 시각화되어 직관적으로 확인할 수 있으며 결과는 csv 파일로 저장됩니다.}
+\item {많은 시뮬레이션 결과를 빠르게 얻기 위해 시각화를 해제하고 병렬로 진행시킬 수 있습니다.}
+\item {실험 및 분석을 진행하여 해당 레포 README에 보고서로 작성하였습니다.}
+\item {무선이동통신네트워크 과목의 final 과제로 진행한 프로젝트이며, 해당 과목은 A+로 이수하였습니다.}
 \end{cvitems}
