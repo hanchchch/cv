@@ -69,7 +69,7 @@
 \setlength{\acvSidebarSep}{5mm}
 % Redefine geometry macro
 \LetLtxMacro{\oldgeometry}{\geometry}
-\renewcommand{\geometry}[2][6cm]{\oldgeometry{#2}
+\renewcommand{\geometry}[2][0cm]{\oldgeometry{#2}
 	\setlength{\@headerWidth}{\textwidth}
 	\setlength{\@leftMarg}{1in+\hoffset+\oddsidemargin}
 	\setlength{\@topMarg}{1in+\voffset+\topmargin+\headheight+\headsep}
