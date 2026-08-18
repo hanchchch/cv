@@ -1,0 +1,81 @@
+name: Build & Release CV
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "source/**"
+      - ".github/workflows/release-cv.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile CV (LuaLaTeX)
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: source
+          root_file: CV_ChungHwanHan.tex
+          args: -pdflua -shell-escape -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Compute release tag
+        id: tag
+        run: echo "tag=$(date +%Y.%m.%d)" >> "$GITHUB_OUTPUT"
+
+      - name: Create / update GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          # Replace any existing release/tag for today so the asset is fresh.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release delete "$TAG" --cleanup-tag --yes
+          fi
+          gh release create "$TAG" \
+            --title "$TAG" \
+            --notes "Automated CV build from ${GITHUB_SHA::7}." \
+            --target "$GITHUB_SHA" \
+            source/CV_ChungHwanHan.pdf
+
+      - name: Update CV link in hanchchch/hanchchch
+        env:
+          GH_TOKEN: ${{ secrets.CROSS_REPO_TOKEN }}
+          TAG: ${{ steps.tag.outputs.tag }}
+        run: |
+          set -euo pipefail
+          git clone "https://x-access-token:${GH_TOKEN}@github.com/hanchchch/hanchchch.git" profile
+          cd profile
+
+          export NEW_LINE="[![CV Badge](https://img.shields.io/badge/Hanch_Han-CV_${TAG}-000?style=flat-square&link=https://github.com/hanchchch/cv/releases/download/${TAG}/CV_ChungHwanHan.pdf)](https://github.com/hanchchch/cv/releases/download/${TAG}/CV_ChungHwanHan.pdf)"
+
+          # Rewrite the single line containing the CV badge marker.
+          python3 -c '
+          import os, pathlib
+          new_line = os.environ["NEW_LINE"]
+          p = pathlib.Path("README.md")
+          lines = p.read_text().splitlines(keepends=True)
+          for i, line in enumerate(lines):
+              if "![CV Badge]" in line:
+                  lines[i] = new_line + ("\n" if line.endswith("\n") else "")
+                  break
+          else:
+              raise SystemExit("CV Badge line not found in README.md")
+          p.write_text("".join(lines))
+          '
+
+          if git diff --quiet; then
+            echo "CV link already up to date; nothing to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore: update CV link to ${TAG}"
+          git push
